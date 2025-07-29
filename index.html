@@ -458,36 +458,83 @@
     </section>
     
     <!-- Contact Form Section -->
-    <script>
-document.getElementById('contact-form').addEventListener('submit', async function (e) {
-  e.preventDefault();
+<!-- Contact Form Section -->
+<section id="contact" class="py-20 bg-gradient-to-b from-dark-gray to-black">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="bg-black bg-opacity-70 rounded-xl p-8 md:p-12 neon-border">
+      <div class="text-center mb-10">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4 neon-glow">
+          SEEK <span class="text-neon-green">GUIDANCE</span>
+        </h2>
+        <div class="w-24 h-1 bg-neon-green mx-auto mb-6"></div>
+        <p class="text-lg text-gray-300 max-w-xl mx-auto">
+          Submit your query to the Senseii and receive personalized trading wisdom
+        </p>
+      </div>
 
-  const form = e.target;
-  const data = {
-    name: form.name.value,
-    email: form.email.value,
-    telegram: form.telegram.value || "-",
-    message: form.message.value,
-    date: new Date().toLocaleString()
-  };
+      <form id="contact-form" class="space-y-6">
+        <div>
+          <label for="name" class="block text-sm font-medium text-gray-300 mb-2">Your Name</label>
+          <input type="text" id="name" name="name" required class="w-full form-input px-4 py-3 rounded-lg focus:outline-none text-white">
+        </div>
 
-  // Replace with your SheetDB URL
-  const SHEETDB_API = https://sheetdb.io/api/v1/jplfgmdoeouqa ;
+        <div>
+          <label for="email" class="block text-sm font-medium text-gray-300 mb-2">Email Address</label>
+          <input type="email" id="email" name="email" required class="w-full form-input px-4 py-3 rounded-lg focus:outline-none text-white">
+        </div>
 
-  const res = await fetch(SHEETDB_API, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ data })
+        <div>
+          <label for="telegram" class="block text-sm font-medium text-gray-300 mb-2">Telegram ID (Optional)</label>
+          <input type="text" id="telegram" name="telegram" class="w-full form-input px-4 py-3 rounded-lg focus:outline-none text-white">
+        </div>
+
+        <div>
+          <label for="message" class="block text-sm font-medium text-gray-300 mb-2">Your Trading Question</label>
+          <textarea id="message" name="message" rows="4" required class="w-full form-input px-4 py-3 rounded-lg focus:outline-none text-white"></textarea>
+        </div>
+
+        <div class="pt-4">
+          <button type="submit" class="w-full px-6 py-4 bg-neon-green text-black font-bold rounded-lg hover:bg-opacity-90 transition-all duration-300 neon-hover ripple pulse-animation">
+            SUBMIT QUERY TO THE SENSEII
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- JS to handle submission to SheetDB -->
+<script>
+  document.getElementById('contact-form').addEventListener('submit', async function (e) {
+    e.preventDefault();
+
+    const form = e.target;
+    const data = {
+      name: form.name.value,
+      email: form.email.value,
+      telegram: form.telegram.value || "-",
+      message: form.message.value,
+      date: new Date().toLocaleString()
+    };
+
+    // ✅ Replace this with your actual SheetDB API URL
+    const SHEETDB_API = https://sheetdb.io/api/v1/jplfgmdoeouqa;
+
+    const res = await fetch(SHEETDB_API, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ data })
+    });
+
+    if (res.ok) {
+      alert("Query submitted successfully! The Senseii will guide you soon.");
+      form.reset();
+    } else {
+      alert("Something went wrong. Please try again later.");
+    }
   });
-
-  if (res.ok) {
-    alert("Query submitted successfully! The Senseii will guide you soon.");
-    form.reset();
-  } else {
-    alert("Something went wrong. Please try again later.");
-  }
-});
 </script>
+
 
     <!-- Testimonials Section -->
     <section id="testimonials" class="py-20 bg-black">
